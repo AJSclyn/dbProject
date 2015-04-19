@@ -60,6 +60,17 @@
 		<br>
 		<br>	
 		<br>	
+		
+		<?php
+
+		$user = 'root';
+		$pass = '';
+		$db = 'university';
+
+		$db = new mysqli('localhost', $user, $pass, $db) or die("Unable to connect");
+
+
+		?>
         <!-- /container -->
         <!-- Bootstrap core JavaScript
     ================================================== -->

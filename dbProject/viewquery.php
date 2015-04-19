@@ -17,7 +17,12 @@
 		</div>
 		
 		<?php
-			$db = new mysqli('localhost', 'site', 'pass', 'dbproject');
+			
+		$user = 'root';
+		$pass = '';
+		$db = 'university';
+
+		$db = new mysqli('localhost', $user, $pass, $db) or die("Unable to connect");
 
 			if($db->connect_errno > 0){
 				die('Unable to connect to database [' . $db->connect_error . ']');
