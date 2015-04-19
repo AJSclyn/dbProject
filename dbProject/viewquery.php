@@ -16,29 +16,23 @@
             </div>
 		</div>
 		
-		 <?php
-			// $db = new mysqli('localhost', 'site', 'pass', 'dbproject');
+		<?php
+			$db = new mysqli('localhost', 'site', 'pass', 'dbproject');
 
-			// if($db->connect_errno > 0){
-				// die('Unable to connect to database [' . $db->connect_error . ']');
-			// }
+			if($db->connect_errno > 0){
+				die('Unable to connect to database [' . $db->connect_error . ']');
+			}
 			
-			// $result = mysql_query('SELECT * FROM main');
-			// if (!$result) {
-				// die('Invalid query: ' . mysql_error());
-			// }
+			$result = mysql_query('SELECT * FROM main');
+			if (!$result) {
+				die('Invalid query: ' . mysql_error());
+			}
 			
-			// while($row = $result->fetch_assoc()){
-				// echo $row['username'] . '<br />';
-			// }
-			$user = 'root';
-$pass = '';
-$db = 'university';
-
-$db = new mysqli('localhost', $user, $pass, $db) or die("Unable to connect");
-
-
-		 ?>
+			while($row = $result->fetch_assoc()){
+				echo $row['username'] . '<br />';
+			}
+			
+		?>
 		
 		<br>
 		<center>

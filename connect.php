@@ -2,7 +2,7 @@
 
 $user = 'root';
 $pass = '';
-$db = 'university';
+$db = 'school';
 
 $db = new mysqli('localhost', $user, $pass, $db) or die("Unable to connect");
 

@@ -70,14 +70,3 @@
         <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
     </body>
 </html>
-
-<?php
-
-$user = 'root';
-$pass = '';
-$db = 'university';
-
-$db = new mysqli('localhost', $user, $pass, $db) or die("Unable to connect");
-
-
-?>
