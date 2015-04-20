@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2015 at 05:13 AM
+-- Generation Time: Apr 20, 2015 at 04:19 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -15,8 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-CREATE DATABASE university;
-USE university;
+
 --
 -- Database: `university`
 --
@@ -32,6 +31,15 @@ CREATE TABLE IF NOT EXISTS `belongsin` (
   `P.SSN` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `belongsin`
+--
+
+INSERT INTO `belongsin` (`DNAME`, `P.SSN`) VALUES
+('Computer Science', 46714871),
+('Computer Science', 758100659),
+('Genetics', 777746214);
+
 -- --------------------------------------------------------
 
 --
@@ -43,6 +51,18 @@ CREATE TABLE IF NOT EXISTS `cd` (
   `DNAME` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `cd`
+--
+
+INSERT INTO `cd` (`CNAME`, `DNAME`) VALUES
+('Graduate School', 'Anesthesiology'),
+('College of Engineeri', 'Computer Science'),
+('College of Nursing', 'Computer Science'),
+('College of Education', 'Genetics'),
+('Liberal Arts and Sci', 'Psychology'),
+('Graduate School', 'Radiology');
+
 -- --------------------------------------------------------
 
 --
@@ -53,6 +73,14 @@ CREATE TABLE IF NOT EXISTS `chairman` (
   `DNAME` varchar(20) NOT NULL,
   `P.SSN` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `chairman`
+--
+
+INSERT INTO `chairman` (`DNAME`, `P.SSN`) VALUES
+('Computer Science', 758100659),
+('Genetics', 777746214);
 
 -- --------------------------------------------------------
 
@@ -68,6 +96,15 @@ CREATE TABLE IF NOT EXISTS `college` (
   `CDEAN` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `college`
+--
+
+INSERT INTO `college` (`DNAME`, `DCODE`, `CNAME`, `COFFICE`, `CDEAN`) VALUES
+('Anesthesiology', 234, 'Graduate School', '3435', 'Albert Brennaman'),
+('Computer Science', 3, 'College of Engineeri', '4523', 'Loren Shibert'),
+('Genetics', 1023, 'College of Education', '343', 'George Lopey');
+
 -- --------------------------------------------------------
 
 --
@@ -79,6 +116,17 @@ CREATE TABLE IF NOT EXISTS `committee` (
   `S.ST#` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `committee`
+--
+
+INSERT INTO `committee` (`P.SSN`, `S.ST#`) VALUES
+(127673588, 1),
+(289885832, 2),
+(364010088, 3),
+(522885124, 4),
+(905837514, 23);
+
 -- --------------------------------------------------------
 
 --
@@ -87,12 +135,25 @@ CREATE TABLE IF NOT EXISTS `committee` (
 
 CREATE TABLE IF NOT EXISTS `course` (
   `CNUM` int(11) NOT NULL,
+  `CDEPT` varchar(20) NOT NULL,
   `CNAME` varchar(20) NOT NULL,
   `CDESC` varchar(100) NOT NULL,
   `CREDIT` int(11) NOT NULL,
-  `LEVEL` int(1) NOT NULL,
-  `CDEPT` varchar(20) NOT NULL
+  `LEVEL` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`CNUM`, `CDEPT`, `CNAME`, `CDESC`, `CREDIT`, `LEVEL`) VALUES
+(1200, 'Genetics', 'Intro Geneticology', 'X and y chromosomes overload', 3, 2),
+(2500, 'Nursing', 'Basic Care', '', 5, 2),
+(3000, 'Computer Science', 'Algorithm Design Lec', 'As n days in class progresses the difficulty is n factorial', 4, 3),
+(3432, 'Computer Science', 'Information Systems', 'DB Shtuff', 4, 4),
+(3433, 'Computer Science', 'Information Systems', 'DB Shtuff 2', 4, 3),
+(5030, 'Computer Science', 'Senior Project', 'Final Boss ', 5, 5),
+(5031, 'Computer Science', 'Senior Project Lab', '', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -116,8 +177,20 @@ CREATE TABLE IF NOT EXISTS `department` (
   `NAME` varchar(20) NOT NULL,
   `CODE` int(5) NOT NULL,
   `OFFICENUM` int(11) DEFAULT NULL,
-  `OFFICEPHONE` int(7) DEFAULT NULL
+  `OFFICEPHONE` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`NAME`, `CODE`, `OFFICENUM`, `OFFICEPHONE`) VALUES
+('Psychology', 3, 2, 2147483647),
+('Radiology', 5, 453, 2147483647),
+('Computer Science', 34, 1, 1234567891),
+('Nursing', 98, 3438, 2147483647),
+('Anesthesiology', 234, 3435, 2147483647),
+('Genetics', 1023, 343, 2147483647);
 
 -- --------------------------------------------------------
 
@@ -129,9 +202,18 @@ CREATE TABLE IF NOT EXISTS `faculty` (
   `P.SSN` int(9) NOT NULL,
   `RANK` int(11) NOT NULL,
   `FOFFICE` varchar(20) NOT NULL,
-  `FPHONE` int(10) NOT NULL,
+  `FPHONE` int(11) NOT NULL,
   `SALARY` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `faculty`
+--
+
+INSERT INTO `faculty` (`P.SSN`, `RANK`, `FOFFICE`, `FPHONE`, `SALARY`) VALUES
+(46714871, 1, '32', 1247483647, 75000),
+(758100659, 1, '32', 1247483648, 10000000),
+(777746214, 3, '36', 1235348834, 30000);
 
 -- --------------------------------------------------------
 
@@ -194,6 +276,20 @@ CREATE TABLE IF NOT EXISTS `majorsin` (
   `DNAME` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `majorsin`
+--
+
+INSERT INTO `majorsin` (`SSN`, `DNAME`) VALUES
+(127673588, 'Computer Science'),
+(289885832, 'Computer Science'),
+(364010088, 'Computer Science'),
+(522885124, 'Computer Science'),
+(671315440, 'Nursing'),
+(547959004, 'Psychology'),
+(690549542, 'Radiology'),
+(905837514, 'Radiology');
+
 -- --------------------------------------------------------
 
 --
@@ -205,15 +301,12 @@ CREATE TABLE IF NOT EXISTS `minorsin` (
   `DNAME` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `nonacademic`
+-- Dumping data for table `minorsin`
 --
 
-CREATE TABLE IF NOT EXISTS `nonacademic` (
-  `P.SSN` int(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `minorsin` (`SSN`, `DNAME`) VALUES
+(522885124, 'Psychology');
 
 -- --------------------------------------------------------
 
@@ -226,8 +319,25 @@ CREATE TABLE IF NOT EXISTS `person` (
   `NAME` varchar(20) NOT NULL,
   `ADDRESS` varchar(25) NOT NULL,
   `SEX` varchar(6) NOT NULL,
-  `BDATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `BDATE` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `person`
+--
+
+INSERT INTO `person` (`SSN`, `NAME`, `ADDRESS`, `SEX`, `BDATE`) VALUES
+(46714871, 'Nathan Fisher', '343 Convex Hull Treaps Re', 'Male', '0000-00-00'),
+(127673588, 'Zachary Rzot', '8745 Chrysler Way', 'Male', '1991-10-27'),
+(289885832, 'Kelly Malarkey', '73 Outback Rd', 'Male', '1990-11-27'),
+(364010088, 'Paavai Sampath', '3434 Lihao Drive', 'Female', '1995-05-19'),
+(522885124, 'Summer Sandhu', '0873 Rich Ct', 'Female', '1950-03-20'),
+(547959004, 'Carl Smith', '343 Rito Way', 'Male', '1990-04-08'),
+(671315440, 'AJ Saclayan', '3498 Briarwood Court', 'Male', '1991-12-28'),
+(690549542, 'Van Nguyen', '8349 Really Far Away', 'Male', '1992-03-19'),
+(758100659, 'Narandera Goel', '0874 Rich Ct', 'Male', '1900-09-12'),
+(777746214, 'Albert Einstein', '45 Vista Way', 'Male', '1900-03-19'),
+(905837514, 'Kobe Bryant', '123 Somewhere In LA', 'Male', '1985-03-19');
 
 -- --------------------------------------------------------
 
@@ -283,9 +393,22 @@ CREATE TABLE IF NOT EXISTS `staff` (
 
 CREATE TABLE IF NOT EXISTS `student` (
   `ST#` int(11) NOT NULL,
-  `SSN` int(9) NOT NULL,
-  `CLASS` varchar(20) NOT NULL
+  `SSN` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`ST#`, `SSN`) VALUES
+(1, 127673588),
+(2, 289885832),
+(3, 364010088),
+(4, 522885124),
+(5, 547959004),
+(6, 671315440),
+(6, 690549542),
+(23, 905837514);
 
 -- --------------------------------------------------------
 
@@ -300,9 +423,7 @@ CREATE TABLE IF NOT EXISTS `student_sports` (
   `PIC` varchar(20) NOT NULL,
   `OFFLOC` varchar(20) NOT NULL,
   `NOS` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
-
-;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -380,7 +501,7 @@ ALTER TABLE `committee`
 -- Indexes for table `course`
 --
 ALTER TABLE `course`
- ADD PRIMARY KEY (`CNUM`), ADD UNIQUE KEY `CNUM` (`CNUM`), ADD UNIQUE KEY `CNUM_2` (`CNUM`);
+ ADD PRIMARY KEY (`CNUM`,`CDEPT`), ADD UNIQUE KEY `CNUM` (`CNUM`), ADD UNIQUE KEY `CNUM_2` (`CNUM`), ADD KEY `CDEPT` (`CDEPT`);
 
 --
 -- Indexes for table `current_section`
@@ -437,12 +558,6 @@ ALTER TABLE `minorsin`
  ADD PRIMARY KEY (`SSN`,`DNAME`), ADD KEY `DNAME` (`DNAME`);
 
 --
--- Indexes for table `nonacademic`
---
-ALTER TABLE `nonacademic`
- ADD PRIMARY KEY (`P.SSN`);
-
---
 -- Indexes for table `person`
 --
 ALTER TABLE `person`
@@ -477,6 +592,12 @@ ALTER TABLE `staff`
 --
 ALTER TABLE `student`
  ADD PRIMARY KEY (`ST#`,`SSN`), ADD KEY `SSN` (`SSN`);
+
+--
+-- Indexes for table `student_sports`
+--
+ALTER TABLE `student_sports`
+ ADD PRIMARY KEY (`S.SSN`,`PRIMARY`);
 
 --
 -- Indexes for table `supports`
@@ -534,6 +655,12 @@ ADD CONSTRAINT `college_ibfk_3` FOREIGN KEY (`DNAME`) REFERENCES `department` (`
 ALTER TABLE `committee`
 ADD CONSTRAINT `committee_ibfk_1` FOREIGN KEY (`P.SSN`) REFERENCES `student` (`SSN`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `committee_ibfk_2` FOREIGN KEY (`S.ST#`) REFERENCES `student` (`ST#`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `course`
+--
+ALTER TABLE `course`
+ADD CONSTRAINT `course_ibfk_1` FOREIGN KEY (`CDEPT`) REFERENCES `department` (`NAME`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `current_section`
@@ -606,8 +733,13 @@ ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`P.SSN`) REFERENCES `faculty` (`P.SSN
 -- Constraints for table `student`
 --
 ALTER TABLE `student`
-ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`ST#`) REFERENCES `person` (`SSN`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`SSN`) REFERENCES `person` (`SSN`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `student_sports`
+--
+ALTER TABLE `student_sports`
+ADD CONSTRAINT `student_sports_ibfk_1` FOREIGN KEY (`S.SSN`) REFERENCES `student` (`ST#`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `supports`
